@@ -34,3 +34,12 @@ export const processHashcodeFile = (filename) => {
 
   return photos;
 }
+
+export const writeHashcodeResult = (photos, filename) => {
+  let result = '';
+  result = result + `${photos.length}\n`;
+  photos.forEach(photo => {
+    result = result + `${photo.id}\n`;
+  });
+  writeFile(`files/output/${filename}`, result);
+}

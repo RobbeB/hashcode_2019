@@ -1,14 +1,15 @@
-import { processHashcodeFile } from './fileService';
-import { getHorizontalPhotos, getVerticalPhotos, sortByAmountOfTags, loopPhotos } from './photoService';
+import { processHashcodeFile, writeHashcodeResult } from './fileService';
+import { getHorizontalPhotos, getVerticalPhotos, sortByAmountOfTags, loopPhotos, matchVerticalPhotos } from './photoService';
 
-const photos = processHashcodeFile('files/input/b_lovely_landscapes.txt');
+const photos = processHashcodeFile('files/input/d_pet_pictures.txt');
 
 const horizontal = getHorizontalPhotos(photos);
 const vertical = getVerticalPhotos(photos);
 
-const sorted = sortByAmountOfTags(horizontal);
+const sortedVertical = sortByAmountOfTags(vertical);
+const newHorizontal = matchVerticalPhotos(sortedVertical);
+const allPhotos = horizontal.concat(newHorizontal);
+const allPhotosSorted = sortByAmountOfTags(allPhotos);
 
-
-const result = loopPhotos(sorted);
-
-result.forEach((item) => console.log(item.toPrintFormat()));
+const result = loopPhotos(allPhotosSorted);
+writeHashcodeResult(result, 'd_pet_pictures.txt');

@@ -1,3 +1,5 @@
+import Photo from "./model/photo";
+
 export const getHorizontalPhotos = (photos) => {
   return photos.filter(photo => photo.orientation === 'H');
 }
@@ -31,17 +33,33 @@ export const getOptimalMatch = (item, arr) => {
   let optimalMatch = null;
   let highestNumberOfMatches = -1;
 
-	arr.forEach((photo) => {
+	for (let photo of arr) {
     let intersection = photo.tags.filter(x => item.tags.includes(x));
   	const amountOfMatchingTags = intersection.length;
     if (amountOfMatchingTags <= photo.tags.length / 2 && amountOfMatchingTags > highestNumberOfMatches) {
       optimalMatch = photo;
       highestNumberOfMatches = amountOfMatchingTags;
     }
-  })
+    if (amountOfMatchingTags === photo.tags.length / 2) break;
+  }
 
   const index = arr.findIndex(x => x.id === optimalMatch.id);
   if (index > -1) arr.splice(index, 1);
 
   return optimalMatch;
+}
+
+export const matchVerticalPhotos = (photos) => {
+  const result = [];
+  for (let i = 0; i < photos.length / 2; i++) {
+    const joinedId = `${photos[i].id} ${photos[photos.length - 1 - i].id}`;
+    const joinedTags = photos[i].tags.concat(photos[photos.length - 1 - i].tags);
+    result.push(new Photo(joinedId, 'H', joinedTags.length, joinedTags));
+  }
+  return result;
+}
+
+export const findMatchForVerticalPhoto = (photo, photos) => {
+  const currentTags = photo.tags;
+
 }
