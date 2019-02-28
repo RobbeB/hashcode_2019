@@ -1,17 +1,6 @@
-class TestClass {
-  constructor() {
-    this.counter = 5;
-  }
+const fs = require('fs');
 
-  upCounter = () => {
-    this.counter++;
-  }
-
-  showCounter = () => console.log(this.counter);
-}
-
-const myCar = new TestClass;
-
-myCar.showCounter();
-myCar.upCounter();
-myCar.showCounter();
+fs.readFile('test.txt', 'utf8', (err, data) => {
+  if (err) throw err;
+  console.log(data);
+});
