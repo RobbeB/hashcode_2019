@@ -1,6 +1,10 @@
-const fs = require('fs');
+import { processHashcodeFile } from './fileService';
+import { getHorizontalPhotos, getVerticalPhotos, sortByAmountOfTags } from './photoService';
 
-fs.readFile('test.txt', 'utf8', (err, data) => {
-  if (err) throw err;
-  console.log(data);
-});
+const photos = processHashcodeFile('files/input/b_lovely_landscapes.txt');
+
+const horizontal = getHorizontalPhotos(photos);
+const vertical = getVerticalPhotos(photos);
+
+sortByAmountOfTags(horizontal).forEach(photo => console.log(photo.toPrintFormat()));
+
