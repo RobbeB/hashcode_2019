@@ -23,7 +23,7 @@ export const processHashcodeFile = (filename) => {
   const numberOfPhotos = splitFileData.shift();
   const photoData = splitFileData;
 
-  for (let i = 0; i < numberOfPhotos; i++ ) {
+  for (let i = 49999; i < 65000; i++ ) {
     const data = photoData[i];
     const splitData = data.split(' ');
     const orientation = splitData.shift();

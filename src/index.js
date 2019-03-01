@@ -1,7 +1,7 @@
 import { processHashcodeFile, writeHashcodeResult } from './fileService';
 import { getHorizontalPhotos, getVerticalPhotos, sortByAmountOfTags, loopPhotos, matchVerticalPhotos } from './photoService';
 
-const photos = processHashcodeFile('files/input/d_pet_pictures.txt');
+const photos = processHashcodeFile('files/input/e_shiny_selfies.txt');
 
 const horizontal = getHorizontalPhotos(photos);
 const vertical = getVerticalPhotos(photos);
@@ -12,4 +12,4 @@ const allPhotos = horizontal.concat(newHorizontal);
 const allPhotosSorted = sortByAmountOfTags(allPhotos);
 
 const result = loopPhotos(allPhotosSorted);
-writeHashcodeResult(result, 'd_pet_pictures.txt');
+writeHashcodeResult(result, 'e4.txt');
